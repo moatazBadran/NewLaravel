@@ -2,13 +2,8 @@
 
 @section('content')
 
-    <!-- Bootstrap Boilerplate... -->
 
     <div class="panel-body">
-        <!-- Display Validation Errors -->
-        @include('common.errors')
-
-        
         <form action="/post" method="POST" class="form-horizontal">
             {{ csrf_field() }}
 
@@ -33,8 +28,7 @@
     </div>
 
 
-
-    @if (count($tasks) > 0)
+    @if (count($posts) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
                 Current Post
