@@ -10,6 +10,6 @@ class AuthorController extends Controller
 {
      public function allPosts()
     {
-        return view('posts.list'); 
+        return view('posts.show'); 
     }
 }

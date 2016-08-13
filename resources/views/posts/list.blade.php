@@ -6,22 +6,20 @@
 
 <div class="panel-body">
     
-  <form action="/posts/list" method="POST" class="form-horizontal">
+  <form action="/posts/list" method="POST" class="form-horizontal">       
             {{ csrf_field() }}
 
-        <div class="form-group">
-            <label for="task" class="col-sm-3 control-label">Post</label>
-
-            <div class="col-sm-6">
-                 <input type="text" name="name" id="task-name" class="form-control">
-             </div>
-        </div>
+       <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-6">
+                <h1>You can add new post from here !!</h1>
+            </div>
+         </div>
       
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-6">
-                <button type="submit" class="btn btn-default">
+            <div class="col-sm-offset-6 col-sm-5">
+			<a href="posts/create" class="btn btn-primary" >
                     <i class="fa fa-plus"></i> Add Post
-                </button>
+                </a>
             </div>
          </div>
   </form>
@@ -42,30 +40,38 @@
 
 
         <thead>
-             <th>Post</th>
+             <th>Post Title</th>
              <th>&nbsp;</th>
+           
         </thead>
 
 
         <tbody>
             @foreach ($posts as $post)
+                
                 <tr>
 
                     <td class="table-text">
-                    <div>{{ $post->title }}</div>
-                    </td>
-
-                    <td class="table-text">
-                    <div>{{ $post->title }}</div>
-                    </td>
-
-
-                    <td>
-                    <form action="/post/{{ $post->id }}" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    </form>
-                    </td>
+                    <div> <a href="posts/{{$post->id}}">{{ $post->title }}</a> </div>
+                        
+        </td>
+        <td>
+            <div class="col-sm-offset-5 col-sm-5">
+					<a href="edit/{{$post->id}}" class="btn btn-primary" >
+                    <i class="fa fa-plus"></i> Edit Post
+                </a>
+            </div>
+        </td>
+        <td>
+            <div class="col-sm-offset-5 col-sm-5">
+				<a href="{{ route('post.delete', ['post_id' => $post->id]) }}" class="btn btn-primary" >
+                    <i class="fa fa-plus"></i> Delete Post
+                </a>
+            </div>
+        </td>
+                    
+                    
+                    
                 </tr>
              @endforeach
         </tbody>

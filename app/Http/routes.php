@@ -18,9 +18,23 @@ Route::get('/', function () {
     return view('posts.list');
 });
   */         
-Route::get('/home', 'PostController@allPosts');
-Route::get('/posts/{id}','PostController@allPosts');
-Route::get('/author/{id}','AuthorController@singlePost');
+Route::get('/', 'PostController@allPosts');
+
+
+Route::get('/delete-post/{post_id}', [
+    'uses' => 'PostController@deletePost',
+    'as' => 'post.delete',
+    'middleware' => 'auth'
+]);
+
+
+Route::get('/edit/{id}','PostController@edit');
+Route::post('/edit/{id}','PostController@postEditPost');
+
+
+Route::get('/posts/create','PostController@create');
+Route::get('/posts/{id}','PostController@singlePost');
+Route::post('/posts/create','PostController@save');
            
     /*       
     Route::post('posts/list', function (Request $request) {
@@ -34,10 +48,4 @@ Route::get('/author/{id}','AuthorController@singlePost');
             ->withErrors($validator);
     }
     });*/
-        
-        
-     Route::get('/', function () {
-     //$posts = App\Post::orderBy('created_at', 'asc')->get();
-     $posts = App\Post::all();
-     return view('posts.list', ['posts' => $posts]);
-     });
+
